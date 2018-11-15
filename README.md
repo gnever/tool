@@ -40,3 +40,9 @@ python convertTo1.py ./test/ 120
 ```
 python getAllBinarizationImg.py test/github.JPG
 ```
+
+- 将某目录内图片翻转 45 度，共翻转 7 次，每翻转一次生成一张图。适合增加样本数量。还在在翻转中随机增加剪裁、灰度等丰富样本数据 
+
+```
+python rotate.py test 45 7
+```

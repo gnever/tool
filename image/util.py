@@ -6,6 +6,23 @@ import functools
 import numpy as np
 from PIL import Image, ImageEnhance
 
+def rotate(img_path, degree, num):
+    img = Image.open(img_path)
+    
+    save_path = './rotate/'
+    mkdir(save_path)
+
+    i = 1
+    while i <= num:
+        img = img.rotate(degree)
+        img_arr = os.path.basename(img_path).split('.')
+        img_name = save_path + img_arr[0] + '_' + bytes(degree * i) + '.' + img_arr[1]
+        img.save(img_name, quality=95)
+        i += 1
+        print 'save to ' + img_name
+
+
+
 def randomCrop(img_path, size, scale=[0.08, 1.0], ratio=[3. / 4., 4. / 3.]):
     img = Image.open(img_path)
     aspect_ratio = math.sqrt(np.random.uniform(*ratio))
@@ -35,7 +52,7 @@ def randomCrop(img_path, size, scale=[0.08, 1.0], ratio=[3. / 4., 4. / 3.]):
     save_path = './random_crop/'
     mkdir(save_path)
     img_name = save_path + os.path.basename(img_path)
-    img.save(img_name)
+    img.save(img_name, quality=95)
     print 'save to ' + img_name
     return img
 
@@ -50,7 +67,7 @@ def resize(img_path, size):
     save_path = './resize_' + bytes(size) + '/'
     mkdir(save_path)
     img_name = save_path + os.path.basename(img_path)
-    img.save(img_name, quality=100)
+    img.save(img_name, quality=95)
     print 'save to ' + img_name
     return img
 
@@ -63,7 +80,7 @@ def convertToRGB(img_path):
     save_path = './convert/'
     mkdir(save_path)
     img_name = save_path + os.path.basename(img_path)
-    img.save(img_name, quality=100)
+    img.save(img_name, quality=95)
     print 'save to ' + img_name
     return img
 
@@ -99,7 +116,7 @@ def convertToL(img_path):
     mkdir(save_path)
     img_name = save_path + os.path.basename(img_path)
     print('success save to ' + img_name)
-    im.save(img_name)
+    im.save(img_name, quality=95)
 
 def convertTo1(img_path, threshold):
     im = Image.open(img_path)
@@ -121,7 +138,7 @@ def convertTo1(img_path, threshold):
 
     print('success save to ' + img_name)
 
-    bim.save(img_name)
+    bim.save(img_name, quality=95)
 
 def imgList(dir, suffix = '.JPG'):
     
